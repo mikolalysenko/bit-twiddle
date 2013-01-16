@@ -12,6 +12,11 @@
 //Number of bits in an integer
 var INT_BITS = 32;
 
+//Constants
+exports.INT_BITS  = INT_BITS;
+exports.INT_MAX   =  0x7fffffff;
+exports.INT_MIN   = -1<<(INT_BITS-1);
+
 //Returns -1, 0, +1 depending on sign of x
 exports.sign = function(v) {
   return (v > 0) - (v < 0);
@@ -35,7 +40,7 @@ exports.max = function(x, y) {
 
 //Checks if a number is a power of two
 exports.isPow2 = function(v) {
-  return !!(v & (v-1));
+  return !(v & (v-1)) && (!!v);
 }
 
 //Computes log base 2 of v
@@ -63,7 +68,7 @@ exports.popCount = function(v) {
 }
 
 //Counts number of trailing zeros
-exports.countTrailingZeros = function(v) {
+function countTrailingZeros(v) {
   var c = 32;
   v &= -v;
   if (v) c--;
@@ -74,15 +79,17 @@ exports.countTrailingZeros = function(v) {
   if (v & 0x55555555) c -= 1;
   return c;
 }
+exports.countTrailingZeros = countTrailingZeros;
 
 //Rounds to next power of 2
 exports.nextPow2 = function(v) {
+  v += v === 0;
   --v;
-  v |= v >> 1;
-  v |= v >> 2;
-  v |= v >> 4;
-  v |= v >> 8;
-  v |= v >> 16;
+  v |= v >>> 1;
+  v |= v >>> 2;
+  v |= v >>> 4;
+  v |= v >>> 8;
+  v |= v >>> 16;
   return v + 1;
 }
 
@@ -100,13 +107,12 @@ var REVERSE_TABLE = new Array(256);
 (function(tab) {
   for(var i=0; i<256; ++i) {
     var v = i, r = i, s = 7;
-    for (v >>= 1; v; v >>= 1)
-    {   
+    for (v >>>= 1; v; v >>>= 1) {
       r <<= 1;
       r |= v & 1;
-      s--;
+      --s;
     }
-    tab[i] = r << s;
+    tab[i] = (r << s) & 0xff;
   }
 })(REVERSE_TABLE);
 
@@ -114,8 +120,8 @@ var REVERSE_TABLE = new Array(256);
 exports.reverse = function(v) {
   return  (REVERSE_TABLE[ v         & 0xff] << 24) |
           (REVERSE_TABLE[(v >>> 8)  & 0xff] << 16) |
-          (REVERSE_TABLE[(v >>> 16) & 0xff] << 8) |
-          (REVERSE_TABLE[(v >>> 24) & 0xff];
+          (REVERSE_TABLE[(v >>> 16) & 0xff] << 8)  |
+           REVERSE_TABLE[(v >>> 24) & 0xff];
 }
 
 //Interleave bits of 2 coordinates with 16 bits.  Useful for fast quadtree codes
@@ -178,5 +184,11 @@ exports.deinterleave3 = function(v, n) {
   v = (v | (v>>>8))   & 4278190335;
   v = (v | (v>>>16))  & 0x3FF;
   return (v<<22)>>22;
+}
+
+//Computes next combination in colexicographic order (this is mistakenly called nextPermutation on the bit twiddling hacks page)
+exports.nextCombination = function(v) {
+  var t = v | (v - 1);
+  return (t + 1) | (((~t & -~t) - 1) >>> (countTrailingZeros(v) + 1));
 }
 

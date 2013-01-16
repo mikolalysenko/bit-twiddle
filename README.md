@@ -85,6 +85,10 @@ Interleaves a triple of 10 bit integers.  Useful for fast octree indexing.
 ---------------------
 Same deal as `deinterleave2`, only for triples instead of pairs
 
+`nextCombination(x)`
+--------------------
+Returns next combination ordered colexicographically.
+
 Acknowledgements
 ================
 Code is ported from Sean Eron Anderson's public domain bit twiddling hacks page.  http://graphics.stanford.edu/~seander/bithacks.html
