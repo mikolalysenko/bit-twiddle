@@ -1,6 +1,6 @@
 {
   "name": "bit-twiddle",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Bit twiddling hacks for JavaScript",
   "main": "twiddle.js",
   "scripts": {
