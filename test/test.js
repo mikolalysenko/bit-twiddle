@@ -101,6 +101,20 @@ test("nextPow2", function(t) {
   t.end();
 });
 
+
+test("prevPow2", function(t) {
+  for(var i=0; i<31; ++i) {
+    if(i > 0) {
+      t.equal(bits.prevPow2((1<<i)-1), 1<<(i-1));
+    }
+    t.equal(bits.prevPow2((1<<i)), 1<<i);
+    if(0<i && i < 30) {
+      t.equal(bits.prevPow2((1<<i)+1), 1<<i, "i=" + i + ", " + ((1<<i)+1));
+    }
+  }
+  t.end();
+});
+
 test("parity", function(t) {
   t.equal(bits.parity(1), 1);
   t.equal(bits.parity(0), 0);

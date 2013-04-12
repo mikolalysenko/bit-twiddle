@@ -55,7 +55,11 @@ Counts the number of trailing zeros.
 
 `nextPow2(v)`
 -------------
-Rounds v to the next power of 2.
+Rounds v up to the next power of 2.
+
+`prevPow2(v)`
+-------------
+Rounds v down to the previous power of 2.
 
 `parity(v)`
 -----------

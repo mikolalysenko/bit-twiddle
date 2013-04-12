@@ -93,6 +93,16 @@ exports.nextPow2 = function(v) {
   return v + 1;
 }
 
+//Rounds down to previous power of 2
+exports.prevPow2 = function(v) {
+  v |= v >>> 1;
+  v |= v >>> 2;
+  v |= v >>> 4;
+  v |= v >>> 8;
+  v |= v >>> 16;
+  return v - (v>>>1);
+}
+
 //Computes parity of word
 exports.parity = function(v) {
   v ^= v >>> 16;
