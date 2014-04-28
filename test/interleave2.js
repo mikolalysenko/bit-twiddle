@@ -1,4 +1,4 @@
-var test = require("tap").test
+var test = require("tape")
   , bits = require("../twiddle.js");
 
 test("interleave2", function(t) {

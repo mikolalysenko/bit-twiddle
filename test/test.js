@@ -1,4 +1,4 @@
-var test = require("tap").test
+var test = require("tape")
   , bits = require("../twiddle.js");
 
 var INT_MAX = bits.INT_MAX
