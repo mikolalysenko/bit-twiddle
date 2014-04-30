@@ -1,6 +1,6 @@
 {
   "name": "bit-twiddle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bit twiddling hacks for JavaScript",
   "main": "twiddle.js",
   "scripts": {
@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git://github.com/mikolalysenko/bit-twiddle.git"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "^2.12.3"
+  },
   "keywords": [
     "bit",
     "twiddle",
@@ -46,8 +48,5 @@
   "author": "Mikola Lysenko",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "gitHead": "f0b4adc66dfb632473c57632e87d3a23f3dd2680",
-  "dependencies": {
-    "tape": "^2.12.3"
-  }
+  "gitHead": "f0b4adc66dfb632473c57632e87d3a23f3dd2680"
 }
