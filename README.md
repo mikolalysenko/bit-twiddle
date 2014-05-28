@@ -15,86 +15,68 @@ Via npm:
 
     npm install bit-twiddle
 
-Functions
-=========
+# API
 
-`sign(v)`
----------
+### `sign(v)`
 Computes the sign of the integer v.  Returns:
 * -1 if v < 0
 *  0 if v === 0
 * +1 if v > 0
 
-`abs(v)`
---------
+### `abs(v)`
 Returns the absolute value of the integer v
 
-`min(x,y)`
-----------
+### `min(x,y)`
 Computes the minimum of integers x and y
 
-`max(x,y)`
-----------
+### `max(x,y)`
 Computes the maximum of integers x and y
 
-`isPow2(v)`
------------
+### `isPow2(v)`
 Returns `true` if v is a power of 2, otherwise false.
 
-`log2(v)`
----------
+### `log2(v)`
 Returns an integer approximation of the log-base 2 of v
 
-`log10(v)`
-----------
+### `log10(v)`
 Returns log base 10 of v.
 
-`popCount(v)`
--------------
+### `popCount(v)`
 Counts the number of bits set in v
 
-`countTrailingZeros(v)`
------------------------
+###  `countTrailingZeros(v)`
 Counts the number of trailing zeros.
 
-`nextPow2(v)`
--------------
+### `nextPow2(v)`
 Rounds v up to the next power of 2.
 
-`prevPow2(v)`
--------------
+### `prevPow2(v)`
 Rounds v down to the previous power of 2.
 
-`parity(v)`
------------
+### `parity(v)`
 Computes the parity of the bits in v.
 
-`reverse(v)`
-------------
+### `reverse(v)`
 Reverses the bits of v.
 
-`interleave2(x,y)`
-------------------
+### `interleave2(x,y)`
 Interleaves a pair of 16 bit integers.  Useful for fast quadtree style indexing.  (See wiki: http://en.wikipedia.org/wiki/Z-order_curve )
 
-`deinterleave2(v, n)`
----------------------
+### `deinterleave2(v, n)`
 Deinterleaves the bits of v, returns the nth part.  If both x and y are 16 bit, then it is true that:
 
-    deinterleave2(interleave2(x,y), 0) === x
-    deinterleave2(interleave2(x,y), 1) === y
+```javascript
+deinterleave2(interleave2(x,y), 0) === x
+deinterleave2(interleave2(x,y), 1) === y
+```
     
-`interleave3(x,y,z)`
---------------------
-
+### `interleave3(x,y,z)`
 Interleaves a triple of 10 bit integers.  Useful for fast octree indexing.
 
-`deinterleave3(v, n)`
----------------------
+### `deinterleave3(v, n)`
 Same deal as `deinterleave2`, only for triples instead of pairs
 
-`nextCombination(x)`
---------------------
+### `nextCombination(x)`
 Returns next combination ordered colexicographically.
 
 Acknowledgements
