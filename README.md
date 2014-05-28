@@ -3,7 +3,11 @@ bit-twiddle
 
 This is a collection of miscellaneous bit twiddling hacks ported to JavaScript, mostly taken from here:
 
-http://graphics.stanford.edu/~seander/bithacks.html
+* [Stanford Bit Twiddling Hacks](http://graphics.stanford.edu/~seander/bithacks.html)
+
+[![testling badge](https://ci.testling.com/mikolalysenko/bit-twiddle.png)](https://ci.testling.com/mikolalysenko/bit-twiddle)
+
+[![build status](https://secure.travis-ci.org/mikolalysenko/bit-twiddle.png)](http://travis-ci.org/mikolalysenko/bit-twiddle)
 
 Install
 =======
