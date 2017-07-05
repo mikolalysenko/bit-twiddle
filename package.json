@@ -1,16 +1,19 @@
 {
   "name": "bit-twiddle",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Bit twiddling hacks for JavaScript",
   "main": "twiddle.js",
+  "module": "twiddle.es.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "build": "rollup twiddle.es.js --format cjs --output twiddle.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/mikolalysenko/bit-twiddle.git"
   },
   "devDependencies": {
+    "rollup": "^0.43.0",
     "tape": "^2.12.3"
   },
   "keywords": [

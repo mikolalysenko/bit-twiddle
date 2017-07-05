@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 /**
  * Bit twiddling hacks for JavaScript.
  *
@@ -11,40 +7,42 @@ Object.defineProperty(exports, '__esModule', { value: true });
  *    http://graphics.stanford.edu/~seander/bithacks.html
  */
 
+"use strict"; "use restrict";
+
 //Number of bits in an integer
 //Constants
-const INT_BITS  = 32;
-const INT_MAX   =  0x7fffffff;
-const INT_MIN   = -1<<(INT_BITS-1);
+export const INT_BITS  = 32;
+export const INT_MAX   =  0x7fffffff;
+export const INT_MIN   = -1<<(INT_BITS-1);
 
 //Returns -1, 0, +1 depending on sign of x
-function sign(v) {
+export function sign(v) {
   return (v > 0) - (v < 0);
 }
 
 //Computes absolute value of integer
-function abs(v) {
+export function abs(v) {
   var mask = v >> (INT_BITS-1);
   return (v ^ mask) - mask;
 }
 
 //Computes minimum of integers x and y
-function min(x, y) {
+export function min(x, y) {
   return y ^ ((x ^ y) & -(x < y));
 }
 
 //Computes maximum of integers x and y
-function max(x, y) {
+export function max(x, y) {
   return x ^ ((x ^ y) & -(x < y));
 }
 
 //Checks if a number is a power of two
-function isPow2(v) {
+export function isPow2(v) {
   return !(v & (v-1)) && (!!v);
 }
 
 //Computes log base 2 of v
-function log2(v) {
+export function log2(v) {
   var r, shift;
   r =     (v > 0xFFFF) << 4; v >>>= r;
   shift = (v > 0xFF  ) << 3; v >>>= shift; r |= shift;
@@ -54,21 +52,21 @@ function log2(v) {
 }
 
 //Computes log base 10 of v
-function log10(v) {
+export function log10(v) {
   return  (v >= 1000000000) ? 9 : (v >= 100000000) ? 8 : (v >= 10000000) ? 7 :
           (v >= 1000000) ? 6 : (v >= 100000) ? 5 : (v >= 10000) ? 4 :
           (v >= 1000) ? 3 : (v >= 100) ? 2 : (v >= 10) ? 1 : 0;
 }
 
 //Counts number of bits
-function popCount(v) {
+export function popCount(v) {
   v = v - ((v >>> 1) & 0x55555555);
   v = (v & 0x33333333) + ((v >>> 2) & 0x33333333);
   return ((v + (v >>> 4) & 0xF0F0F0F) * 0x1010101) >>> 24;
 }
 
 //Counts number of trailing zeros
-function countTrailingZeros(v) {
+export function countTrailingZeros(v) {
   var c = 32;
   v &= -v;
   if (v) c--;
@@ -81,7 +79,7 @@ function countTrailingZeros(v) {
 }
 
 //Rounds to next power of 2
-function nextPow2(v) {
+export function nextPow2(v) {
   v += v === 0;
   --v;
   v |= v >>> 1;
@@ -93,7 +91,7 @@ function nextPow2(v) {
 }
 
 //Rounds down to previous power of 2
-function prevPow2(v) {
+export function prevPow2(v) {
   v |= v >>> 1;
   v |= v >>> 2;
   v |= v >>> 4;
@@ -103,7 +101,7 @@ function prevPow2(v) {
 }
 
 //Computes parity of word
-function parity(v) {
+export function parity(v) {
   v ^= v >>> 16;
   v ^= v >>> 8;
   v ^= v >>> 4;
@@ -126,7 +124,7 @@ let REVERSE_TABLE = new Array(256);
 })(REVERSE_TABLE);
 
 //Reverse bits in a 32 bit word
-function reverse(v) {
+export function reverse(v) {
   return  (REVERSE_TABLE[ v         & 0xff] << 24) |
           (REVERSE_TABLE[(v >>> 8)  & 0xff] << 16) |
           (REVERSE_TABLE[(v >>> 16) & 0xff] << 8)  |
@@ -134,7 +132,7 @@ function reverse(v) {
 }
 
 //Interleave bits of 2 coordinates with 16 bits.  Useful for fast quadtree codes
-function interleave2(x, y) {
+export function interleave2(x, y) {
   x &= 0xFFFF;
   x = (x | (x << 8)) & 0x00FF00FF;
   x = (x | (x << 4)) & 0x0F0F0F0F;
@@ -151,7 +149,7 @@ function interleave2(x, y) {
 }
 
 //Extracts the nth interleaved component
-function deinterleave2(v, n) {
+export function deinterleave2(v, n) {
   v = (v >>> n) & 0x55555555;
   v = (v | (v >>> 1))  & 0x33333333;
   v = (v | (v >>> 2))  & 0x0F0F0F0F;
@@ -162,7 +160,7 @@ function deinterleave2(v, n) {
 
 
 //Interleave bits of 3 coordinates, each with 10 bits.  Useful for fast octree codes
-function interleave3(x, y, z) {
+export function interleave3(x, y, z) {
   x &= 0x3FF;
   x  = (x | (x<<16)) & 4278190335;
   x  = (x | (x<<8))  & 251719695;
@@ -186,7 +184,7 @@ function interleave3(x, y, z) {
 }
 
 //Extracts nth interleaved component of a 3-tuple
-function deinterleave3(v, n) {
+export function deinterleave3(v, n) {
   v = (v >>> n)       & 1227133513;
   v = (v | (v>>>2))   & 3272356035;
   v = (v | (v>>>4))   & 251719695;
@@ -196,29 +194,7 @@ function deinterleave3(v, n) {
 }
 
 //Computes next combination in colexicographic order (this is mistakenly called nextPermutation on the bit twiddling hacks page)
-function nextCombination(v) {
+export function nextCombination(v) {
   var t = v | (v - 1);
   return (t + 1) | (((~t & -~t) - 1) >>> (countTrailingZeros(v) + 1));
 }
-
-exports.INT_BITS = INT_BITS;
-exports.INT_MAX = INT_MAX;
-exports.INT_MIN = INT_MIN;
-exports.sign = sign;
-exports.abs = abs;
-exports.min = min;
-exports.max = max;
-exports.isPow2 = isPow2;
-exports.log2 = log2;
-exports.log10 = log10;
-exports.popCount = popCount;
-exports.countTrailingZeros = countTrailingZeros;
-exports.nextPow2 = nextPow2;
-exports.prevPow2 = prevPow2;
-exports.parity = parity;
-exports.reverse = reverse;
-exports.interleave2 = interleave2;
-exports.deinterleave2 = deinterleave2;
-exports.interleave3 = interleave3;
-exports.deinterleave3 = deinterleave3;
-exports.nextCombination = nextCombination;
